@@ -7,6 +7,6 @@
         <item
             android:id="@+id/enlaces"
             android:icon="@drawable/ic_menu_camera"
-            android:title="@string/menu_home" />
+            android:title="@string/menu_enlaces" />
     </group>
 </menu>

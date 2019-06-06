@@ -1,5 +1,6 @@
 package com.jpapps.linkdirectory;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -12,6 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -82,9 +86,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
 
+        Intent i = new Intent(this, Enlaces.class);
+
+        startActivityForResult(i, 1);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1 && resultCode == RESULT_OK)
+        {
+            WebView webView = findViewById(R.id.webView);
+
+            webView.loadUrl(data.getStringExtra("enlace"));
+        }
     }
 }
