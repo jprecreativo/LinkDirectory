@@ -6,10 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".Enlaces">
 
-    <ListView
-        android:id="@+id/listaEnlaces"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/listaEnlaces"
+            android:layout_width="match_parent"
+            android:layout_height="650dp">
+
+        </ListView>
+
+        <Button
+            android:id="@+id/bt_AñadirEnlace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="añadirEnlace_Click"
+            android:text="Añadir enlace" />
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
