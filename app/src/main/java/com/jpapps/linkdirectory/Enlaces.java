@@ -24,7 +24,7 @@ public class Enlaces extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enlaces);
 
-        ListView listaEnlaces = findViewById(R.id.listaEnlaces);
+        final ListView listaEnlaces = findViewById(R.id.listaEnlaces);
 
         listaEnlaces.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, arrayEnlaces));
         listaEnlaces.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -37,6 +37,40 @@ public class Enlaces extends AppCompatActivity {
                 enlace.putExtra("enlace", parent.getItemAtPosition(position).toString());
                 setResult(RESULT_OK, enlace);
                 finish();
+            }
+        });
+
+        listaEnlaces.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(Enlaces.this);
+                final int pos = position;
+
+                alert.setTitle("Eliminar enlace");
+                alert.setMessage("¿Deseas eliminar el enlace seleccionado?");
+                alert.setPositiveButton("SI", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        arrayEnlaces.remove(pos);
+                        listaEnlaces.setAdapter(new ArrayAdapter<String>(Enlaces.this, android.R.layout.simple_list_item_1, arrayEnlaces));
+                        Toast.makeText(Enlaces.this, "Enlace eliminado correctamente.", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        Toast.makeText(Enlaces.this, "No se ha eliminado el enlace.", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                alert.show();
+
+                return true;
             }
         });
     }
